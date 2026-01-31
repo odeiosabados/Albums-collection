@@ -11,7 +11,7 @@ void salva_no_arquivo(album acervo[], int tamanho, int albums_inseridos) {
 	ofstream dados;
 	dados.open("data.txt");
 	for (int i = 0; i < albums_inseridos; i++) {
-		if (acervo[i].nome != "SERA_APAGADO") {
+		if (acervo[i].sera_salvo == 'S') {
 			dados << acervo[i].nome << " ";
 			dados << acervo[i].genero << " ";
 			dados << acervo[i].ano << " ";
@@ -33,6 +33,7 @@ void registra_album(album acervo[], int tamanho, int &albums_inseridos) {
 	cin >> acervo[i].ano;
 	cout << "digite quantas musicas o album possue: \n";
 	cin >> acervo[i].num_musicas;
+	acervo[i].sera_salvo = 'S';
 	albums_inseridos++;
 	salva_no_arquivo(acervo, tamanho, albums_inseridos);
 }
