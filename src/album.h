@@ -1,13 +1,14 @@
-#ifndef _ALBUM_
-#define _ALBUM_
+#ifndef ALBUM
+#define ALBUM
 #include <iostream>
 
 struct album {
 	std::string nome, genero;
 	int ano, num_musicas;
+	char sera_salvo = 'N';
 };
 
-const int MAX = 2; // Tamanho atual do vetor
+const int MAX = 5; // Tamanho atual do vetor
 int albums_inseridos = 0; // Quantidade de albums salvos
 album acervo[MAX];
 
