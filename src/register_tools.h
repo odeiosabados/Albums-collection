@@ -4,38 +4,120 @@
 #include <fstream>
 #include "album.h"
 #include "menus.h"
+using std::cout;
+using std::cin;
+using std::string;
+using std::ifstream;
+using std::ofstream;
 
-using namespace std;
+void imprime(album colecao) {
+		cout << "\n";
+		cout << "Nome: " << colecao.nome << "\n";
+		cout << "Genero: " << colecao.genero << "\n";
+		cout << "Ano de lancamento: " << colecao.ano << "\n";
+		cout << "Numero de musicas: " << colecao.num_musicas;
+		cout << "\n";	
+}
 
-void salva_no_arquivo(album acervo[], int tamanho, int albums_inseridos) {
+void salva_no_arquivo(album colecao[], int num_alb) {
 	ofstream dados;
 	dados.open("data.txt");
-	for (int i = 0; i < albums_inseridos; i++) {
-		if (acervo[i].sera_salvo == 'S') {
-			dados << acervo[i].nome << " ";
-			dados << acervo[i].genero << " ";
-			dados << acervo[i].ano << " ";
-			dados << acervo[i].num_musicas;
+	for (int i = 0; i < num_alb; i++) {
+		if (colecao[i].sera_salvo != 'N') {
+			dados << colecao[i].nome << "\n";
+			dados << colecao[i].genero << " ";
+			dados << colecao[i].ano << " ";
+			dados << colecao[i].num_musicas;
 			dados << "\n";
 		}
 	}
 }
 
-void registra_album(album acervo[], int tamanho, int &albums_inseridos) {
+void registra_album(album colecao[], int &num_alb) {
 	cin.ignore();
-	int tecla;
-	int i = albums_inseridos;
+	int i = num_alb;
 	cout << "digite o nome do album: \n";
-	getline(cin, acervo[i].nome);
-	cout << "digite o genero do album: \n";
-	cin >> acervo[i].genero;
+	getline(cin, colecao[i].nome);
+	cout << "digite o genero do album (SEM ESPACOS POR ENQUANTO): \n";
+	cin >> colecao[i].genero;
 	cout << "digite o ano do album: \n";
-	cin >> acervo[i].ano;
+	cin >> colecao[i].ano;
 	cout << "digite quantas musicas o album possue: \n";
-	cin >> acervo[i].num_musicas;
-	acervo[i].sera_salvo = 'S';
-	albums_inseridos++;
-	salva_no_arquivo(acervo, tamanho, albums_inseridos);
+	cin >> colecao[i].num_musicas;
+	cout << "deseja salvar as alteracoes? \n";
+	cout << "[s]/[n]\n";
+	char opcao;
+	cin >> opcao;
+	if (opcao == 's') {
+		colecao[i].sera_salvo = 'S';
+		num_alb++;
+		salva_no_arquivo(colecao, num_alb);
+	}
+}
+
+void pesquisa_album(album colecao[], int num_alb) {
+	cin.ignore();
+	string nomealbum;
+	cout << "insira o nome do album\n";
+	getline(cin, nomealbum);
+	for (int i = 0; i < num_alb; i++) {
+		if (nomealbum == colecao[i].nome)
+			imprime(colecao[i]); 
+	}
+}
+
+void imprime_albums(album colecao[], int num_alb) {
+	cout << "albums totais inseridos: " << num_alb << "\n";
+	for (int i = 0; i < num_alb; i++) {
+		if (colecao[i].sera_salvo == 'S')
+			imprime(colecao[i]);
+	}
+}
+
+void edita_album(album colecao[], int num_alb) {
+	cin.ignore();
+	string nomealbum;
+	char opcaoedita, opcaosalva;
+	cout << "digite o nome do album que deseja editar: \n";
+	getline(cin, nomealbum);
+	for (int i = 0; i < num_alb; i++) {
+		if (nomealbum == colecao[i].nome) {
+			imprime(colecao[i]);
+			cout << "digite a acao desejada: \n";
+			cout << "[1] para deletar o album\n";
+			cout << "[2] para editar o album\n";
+			cin >> opcaoedita;
+				if (opcaoedita == '1') {
+					cout << "deseja salvar as alteracoes? \n";
+					cout << "[s]/[n]\n";
+					cin >> opcaosalva;
+					if (opcaosalva == 's') {
+						colecao[i].sera_salvo = 'N';
+						salva_no_arquivo(colecao, num_alb);
+					}
+				}
+				else if (opcaoedita == '2') {
+					cin.ignore();
+					cout << "digite o novo nome do album: \n";
+					getline(cin, colecao[i].nome);
+					cout << "digite o novo genero do album (SEM ESPACOS POR ENQUANTO): \n";
+					cin >> colecao[i].genero;
+					cout << "digite o novo ano do album: \n";
+					cin >> colecao[i].ano;
+					cout << "digite o novo numero de musicas: \n";
+					cin >> colecao[i].num_musicas;
+					cout << "deseja salvar as alteracoes? \n";
+					cout << "[s]/[n]\n";
+					cin >> opcaosalva;
+					if (opcaosalva == 's') {
+						colecao[i].sera_salvo = 'S';
+						salva_no_arquivo(colecao, num_alb);
+					}
+				}
+				else
+					cout << "opcao invalida. retornando ao menu...";
+		}	
+	}
 }
 
 #endif
