@@ -3,38 +3,38 @@
 #include <iostream>
 #include "register_tools.h"
 #include "album.h"
-using namespace std;
+using std::cout;
+using std::cin;
 
-void menu_inicial() {
-	char opcao;
-	cout << "\n";
-	cout << "PLACEHOLDER / MENU ART / PLACEHOLDER\n\n";
-	cout << "digite: \n";
-	cout << "1 para ver todos os albums\n";
-	cout << "2 para adicionar um album\n";
-	cout << "3 para editar um album\n";
-	cout << "4 para pesquisar um album\n";
-	
+char menu_inicial(char opcao) {
 	do {
+		cout << "\n";
+		cout << "PLACEHOLDER / MENU ART / PLACEHOLDER\n\n";
+		cout << "digite: \n";
+		cout << "1 para ver todos os albums\n";
+		cout << "2 para adicionar um album\n";
+		cout << "3 para editar um album\n";
+		cout << "4 para pesquisar um album\n";
+		cout << "0 para sair\n";
 		cin >> opcao;
 		switch (opcao) {
 			case '1':
-				// placeholder para funcao INSPEC
+				imprime_albums(colecao, num_alb);
 				break;
 			case '2':
-				registra_album(acervo, MAX, albums_inseridos);
-				menu_inicial();
+				registra_album(colecao, num_alb);
 				break;
 			case '3':
-				// placeholder para a funcao EDIT
+				edita_album(colecao, num_alb);
 				break;
 			case '4':
-				// placeholder para a funcao SEARCH
+				pesquisa_album(colecao, num_alb);
 				break;
 			default:
-				cout << "Opcao invalida";
+				cout << "Saindo ...";
 		}
 	} while (opcao != '0');
+	return opcao;
 }
-	
+
 #endif
