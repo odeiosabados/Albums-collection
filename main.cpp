@@ -11,43 +11,37 @@ int main() {
 	if (dados.fail())
 		std::ofstream dados("data.txt"); // Cria um arquivo caso nao exista
 	else {
-		while (getline(dados, colecao[num_alb].nome) && dados >> colecao[num_alb].genero >> colecao[num_alb].ano >> colecao[num_alb].num_musicas) {
+		while (num_alb != MAX && getline(dados, colecao[num_alb].nome) && dados >> colecao[num_alb].genero >> colecao[num_alb].ano >> colecao[num_alb].num_musicas) {
 			colecao[num_alb].sera_salvo = 'S';
 			num_alb++;
-			if (num_alb == MAX) {
-				MAX+=10;
-				album* nova_colecao = new album[MAX];
-				for (int i = 0; i < num_alb; i++) {
-					nova_colecao[i].nome = colecao[i].nome;
-					nova_colecao[i].genero = colecao[i].genero;
-					nova_colecao[i].ano = colecao[i].ano;
-					nova_colecao[i].num_musicas = colecao[i].num_musicas;
-					nova_colecao[i].sera_salvo = colecao[i].sera_salvo;
-				}
-				delete[] colecao;
-				colecao = nova_colecao;
-			}
+			aumenta_colecao(colecao, MAX, num_alb);
 			dados.ignore();
 		}
 	}
-	//
+	
 	char opcao;
 	do {
-		if (num_alb == MAX) {
-			MAX+=10;
-			album* nova_colecao = new album[MAX];
-			for (int i = 0; i < num_alb; i++) {
-				nova_colecao[i].nome = colecao[i].nome;
-				nova_colecao[i].genero = colecao[i].genero;
-				nova_colecao[i].ano = colecao[i].ano;
-				nova_colecao[i].num_musicas = colecao[i].num_musicas;
-				nova_colecao[i].sera_salvo = colecao[i].sera_salvo;
-			}
-			delete[] colecao;
-			colecao = nova_colecao;
-		}
+		aumenta_colecao(colecao, MAX, num_alb);
 		std::cout << "armazenamento maximo atual: " << MAX;
-		opcao = menu_inicial(opcao);
+		menu_inicial();
+		cin >> opcao;
+		switch (opcao) {
+			case '1':
+				imprime_albums(colecao, num_alb);
+				pausa();
+				break;
+			case '2':
+				registra_album(colecao, num_alb);
+				break;
+			case '3':
+				edita_album(colecao, num_alb);
+				break;
+			case '4':
+				pesquisa_album(colecao, num_alb);
+				break;
+			default:
+				cout << "Saindo ...";
+		}
 	} while (opcao != '0');
 	
 	return 0;
