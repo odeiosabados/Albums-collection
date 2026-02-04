@@ -6,8 +6,9 @@
 using std::cout;
 using std::cin;
 
-char menu_inicial(char opcao) {
+void menu_inicial() {
 	cout << "\n";
+	cout << "============================\n";
 	cout << "PLACEHOLDER / MENU ART / PLACEHOLDER\n\n";
 	cout << "digite: \n";
 	cout << "1 para ver todos os albums\n";
@@ -15,24 +16,13 @@ char menu_inicial(char opcao) {
 	cout << "3 para editar um album\n";
 	cout << "4 para pesquisar um album\n";
 	cout << "0 para sair\n";
-	cin >> opcao;
-	switch (opcao) {
-		case '1':
-			imprime_albums(colecao, num_alb);
-			break;
-		case '2':
-			registra_album(colecao, num_alb);
-			break;
-		case '3':
-			edita_album(colecao, num_alb);
-			break;
-		case '4':
-			pesquisa_album(colecao, num_alb);
-			break;
-		default:
-			cout << "Saindo ...";
-	}
-	return opcao;
+	cout << "============================\n";
+}
+
+void pausa() {
+	char tecla;
+	cout << "\npressione 1 para continuar\n";
+	cin >> tecla;
 }
 
 #endif
