@@ -19,6 +19,7 @@ int main() {
 		}
 	}
 	
+	//  aplicacao roda ate ser digitado 0
 	char opcao;
 	do {
 		aumenta_colecao(colecao, MAX, num_alb);
@@ -27,14 +28,14 @@ int main() {
 		cin >> opcao;
 		switch (opcao) {
 			case '1':
-				imprime_albums(colecao, num_alb);
+				imprime_albums(colecao, num_alb, albs_deletados);
 				pausa();
 				break;
 			case '2':
 				registra_album(colecao, num_alb);
 				break;
 			case '3':
-				edita_album(colecao, num_alb);
+				edita_album(colecao, num_alb, albs_deletados);
 				break;
 			case '4':
 				pesquisa_album(colecao, num_alb);

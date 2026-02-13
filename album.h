@@ -10,8 +10,10 @@ struct album {
 
 int MAX = 10; // Tamanho atual do vetor
 int num_alb = 0; // NUMERO DE ALBUMS SALVOS abreviado  <- este valor é modificado pela funçao registra_album e pela leitura de dados do main.cpp
+int albs_deletados = 0; //Variavel criada para a funçao imprime_albums() exibir corretamente a quantidade de albuns mesmo apos albuns serem deletados
 album* colecao = new album[MAX];
 
+// Quando o numero de elementos do vetor chegar ao tamanho maximo, o vetor ira aumentar a capacidade em 10
 void aumenta_colecao(album* &colecao, int &MAX, int num_alb) {
 	if (num_alb == MAX) {
 		MAX+=10;

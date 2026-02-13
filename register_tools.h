@@ -61,21 +61,21 @@ void pesquisa_album(album colecao[], int num_alb) {
 	cout << "insira o nome do album\n";
 	getline(cin, nomealbum);
 	for (int i = 0; i < num_alb; i++) {
-		if (nomealbum == colecao[i].nome)
+		if (nomealbum == colecao[i].nome && colecao[i].sera_salvo == 'S')
 			imprime(colecao[i]); 
 	}
 }
 
-void imprime_albums(album colecao[], int num_alb) {
+void imprime_albums(album colecao[], int num_alb, int albs_deletados) {
 	cout << "==========================\n";
-	cout << "albums totais inseridos: " << num_alb << "\n";
+	cout << "albums totais inseridos: " << num_alb - albs_deletados << "\n";
 	for (int i = 0; i < num_alb; i++) {
 		if (colecao[i].sera_salvo == 'S')
 			imprime(colecao[i]);
 	}
 }
 
-void edita_album(album colecao[], int num_alb) {
+void edita_album(album colecao[], int num_alb, int &albs_deletados) {
 	// variaveis temporarias 
 	string temp_nome, temp_genero;
 	int temp_ano, temp_num_musicas;
@@ -86,7 +86,7 @@ void edita_album(album colecao[], int num_alb) {
 	cout << "digite o nome do album que deseja editar: \n";
 	getline(cin, nomealbum);
 	for (int i = 0; i < num_alb; i++) {
-		if (nomealbum == colecao[i].nome) {
+		if (nomealbum == colecao[i].nome && colecao[i].sera_salvo == 'S') {
 			imprime(colecao[i]);
 			cout << "digite a acao desejada: \n";
 			cout << "[1] para deletar o album\n";
@@ -98,6 +98,7 @@ void edita_album(album colecao[], int num_alb) {
 					cin >> opcaosalva;
 					if (opcaosalva == 's') {
 						colecao[i].sera_salvo = 'N';
+						albs_deletados++;
 						salva_no_arquivo(colecao, num_alb);
 					}
 				}
