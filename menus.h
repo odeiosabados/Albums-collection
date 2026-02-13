@@ -16,7 +16,6 @@ void menu_inicial() {
 	cout << "3 para editar um album\n";
 	cout << "4 para pesquisar um album\n";
 	cout << "0 para sair\n";
-	cout << "============================\n";
 }
 
 void pausa() {
