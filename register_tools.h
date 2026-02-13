@@ -67,6 +67,7 @@ void pesquisa_album(album colecao[], int num_alb) {
 }
 
 void imprime_albums(album colecao[], int num_alb) {
+	cout << "==========================\n";
 	cout << "albums totais inseridos: " << num_alb << "\n";
 	for (int i = 0; i < num_alb; i++) {
 		if (colecao[i].sera_salvo == 'S')
@@ -75,6 +76,10 @@ void imprime_albums(album colecao[], int num_alb) {
 }
 
 void edita_album(album colecao[], int num_alb) {
+	// variaveis temporarias 
+	string temp_nome, temp_genero;
+	int temp_ano, temp_num_musicas;
+	
 	cin.ignore();
 	string nomealbum;
 	char opcaoedita, opcaosalva;
@@ -99,17 +104,21 @@ void edita_album(album colecao[], int num_alb) {
 				else if (opcaoedita == '2') {
 					cin.ignore();
 					cout << "digite o novo nome do album: \n";
-					getline(cin, colecao[i].nome);
+					getline(cin, temp_nome);
 					cout << "digite o novo genero do album (SEM ESPACOS POR ENQUANTO): \n";
-					cin >> colecao[i].genero;
+					cin >> temp_genero;
 					cout << "digite o novo ano do album: \n";
-					cin >> colecao[i].ano;
+					cin >> temp_ano;
 					cout << "digite o novo numero de musicas: \n";
-					cin >> colecao[i].num_musicas;
+					cin >> temp_num_musicas;
 					cout << "deseja salvar as alteracoes? \n";
 					cout << "[s]/[n]\n";
 					cin >> opcaosalva;
 					if (opcaosalva == 's') {
+						colecao[i].nome = temp_nome;
+						colecao[i].genero = temp_genero;
+						colecao[i].ano = temp_ano;
+						colecao[i].num_musicas = temp_num_musicas;
 						colecao[i].sera_salvo = 'S';
 						salva_no_arquivo(colecao, num_alb);
 					}
