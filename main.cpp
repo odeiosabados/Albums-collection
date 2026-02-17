@@ -11,7 +11,7 @@ int main() {
 	if (dados.fail())
 		std::ofstream dados("data.txt"); // Cria um arquivo caso nao exista
 	else {
-		while (num_alb != MAX && getline(dados, colecao[num_alb].nome) && dados >> colecao[num_alb].genero >> colecao[num_alb].ano >> colecao[num_alb].num_musicas) {
+		while (num_alb != MAX && getline(dados, colecao[num_alb].nome) && dados >> colecao[num_alb].genero >> colecao[num_alb].ano >> colecao[num_alb].num_musicas >> colecao[num_alb].id) {
 			colecao[num_alb].sera_salvo = 'S';
 			num_alb++;
 			aumenta_colecao(colecao, MAX, num_alb);
@@ -23,7 +23,6 @@ int main() {
 	char opcao;
 	do {
 		aumenta_colecao(colecao, MAX, num_alb);
-		std::cout << "armazenamento maximo atual: " << MAX;
 		menu_inicial();
 		cin >> opcao;
 		switch (opcao) {

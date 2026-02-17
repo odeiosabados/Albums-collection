@@ -4,8 +4,13 @@
 
 struct album {
 	std::string nome, genero;
-	int ano, num_musicas;
+	int ano, num_musicas, id;
 	char sera_salvo = 'N';
+};
+
+struct identificador {
+	char caractere;
+	int valor;
 };
 
 int MAX = 10; // Tamanho atual do vetor
@@ -30,4 +35,32 @@ void aumenta_colecao(album* &colecao, int &MAX, int num_alb) {
 	}
 }
 
+int cria_id (album p) {
+	int t = 27, soma = 0, soma2 = 0;
+	char alfabeto[t] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
+	
+	identificador senha[t];
+	for (int i = 0; i < t; i++) {
+		senha[i].caractere = alfabeto[i];
+		senha[i].valor = i;
+	}
+	
+	std::string nome = p.nome;
+	std::string nome2 = p.genero;
+	
+	for (int i = 0; i < nome.size(); i++) {
+		for (int j = 0; j < t; j++) {
+			if (nome[i] == senha[j].caractere)
+				soma += senha[j].valor;
+		}
+	}
+	for (int i = 0; i < nome2.size(); i++) {
+		for (int j = 0; j < t; j++) {
+			if (nome2[i] == senha[j].caractere)
+				soma2 += senha[j].valor;
+		}
+	}
+	
+	return soma + soma2 + p.ano + p.num_musicas;
+}
 #endif

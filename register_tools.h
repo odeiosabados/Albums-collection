@@ -12,6 +12,7 @@ using std::ofstream;
 
 void imprime(album colecao) {
 		cout << "\n";
+		cout << "ID " << colecao.id << "\n";
 		cout << "Nome: " << colecao.nome << "\n";
 		cout << "Genero: " << colecao.genero << "\n";
 		cout << "Ano de lancamento: " << colecao.ano << "\n";
@@ -27,7 +28,8 @@ void salva_no_arquivo(album colecao[], int num_alb) {
 			dados << colecao[i].nome << "\n";
 			dados << colecao[i].genero << " ";
 			dados << colecao[i].ano << " ";
-			dados << colecao[i].num_musicas;
+			dados << colecao[i].num_musicas << " ";
+			dados << colecao[i].id;
 			dados << "\n";
 		}
 	}
@@ -50,6 +52,7 @@ void registra_album(album colecao[], int &num_alb) {
 	cin >> opcao;
 	if (opcao == 's') {
 		colecao[i].sera_salvo = 'S';
+		colecao[i].id = cria_id(colecao[i]);
 		num_alb++;
 		salva_no_arquivo(colecao, num_alb);
 	}
