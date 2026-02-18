@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include "album.h"
-#include "menus.h"
 using std::cout;
 using std::cin;
 using std::string;
@@ -11,13 +10,13 @@ using std::ifstream;
 using std::ofstream;
 
 void imprime(album colecao) {
-		cout << "\n";
-		cout << "ID " << colecao.id << "\n";
-		cout << "Nome: " << colecao.nome << "\n";
-		cout << "Genero: " << colecao.genero << "\n";
-		cout << "Ano de lancamento: " << colecao.ano << "\n";
-		cout << "Numero de musicas: " << colecao.num_musicas;
-		cout << "\n";	
+	cout << "\n";
+	cout << "ID " << colecao.id << "\n";
+	cout << "Nome: " << colecao.nome << "\n";
+	cout << "Genero: " << colecao.genero << "\n";
+	cout << "Ano de lancamento: " << colecao.ano << "\n";
+	cout << "Numero de musicas: " << colecao.num_musicas;
+	cout << "\n";	
 }
 
 void salva_no_arquivo(album colecao[], int num_alb) {
@@ -78,13 +77,18 @@ void pesquisa_album(album colecao[], int num_alb) {
 )" << "\n";
 	cout << "==============================================================\n\n";
 	cin.ignore();
+	bool encontrou = false;
 	string nomealbum;
 	cout << "Insira o nome do album: \n";
 	getline(cin, nomealbum);
 	for (int i = 0; i < num_alb; i++) {
-		if (nomealbum == colecao[i].nome && colecao[i].sera_salvo == 'S')
-			imprime(colecao[i]); 
+		if (nomealbum == colecao[i].nome && colecao[i].sera_salvo == 'S') {
+			imprime(colecao[i]);
+			encontrou = true;
+		}
 	}
+	if (!encontrou)
+		cout << "Nenhum album encontrado com esse nome";
 }
 
 void imprime_albums(album colecao[], int num_alb, int albs_deletados) {
@@ -97,7 +101,7 @@ void imprime_albums(album colecao[], int num_alb, int albs_deletados) {
 }
 
 void pesquisa_por_genero(album colecao[], int num_alb) {
-		cout << "==============================================================\n";
+	cout << "==============================================================\n";
 	cout << R"(                                                        
               ##################                  
             ######          ######                
@@ -116,33 +120,26 @@ void pesquisa_por_genero(album colecao[], int num_alb) {
                                 ######                                                                                     
 )" << "\n";
 	cout << "==============================================================\n\n";
-    cin.ignore();
-    string genero_buscado;
-    bool encontrou = false;
-
-    cout << "Digite o genero que deseja buscar: ";
-    getline(cin, genero_buscado);
-
-    cout << "\n=== Albuns do genero: " << genero_buscado << " ===\n";
-
-    for (int i = 0; i < num_alb; i++) 
-	{
-	
-        if (genero_buscado == colecao[i].genero && colecao[i].sera_salvo == 'S') {
-            imprime(colecao[i]);
-            encontrou = true;
-        }
+	cin.ignore();
+  string genero_buscado;
+  bool encontrou = false;
+  cout << "Digite o genero que deseja buscar: ";
+  getline(cin, genero_buscado);
+  cout << "\n=== Albuns do genero: " << genero_buscado << " ===\n";
+  for (int i = 0; i < num_alb; i++) {
+		if (genero_buscado == colecao[i].genero && colecao[i].sera_salvo == 'S') {
+      imprime(colecao[i]);
+      encontrou = true;
     }
-
-    if (!encontrou) {
-        cout << "Nenhum album encontrado para esse genero.\n";
-    }
-    
-    cout << "==========================================\n";
+  }
+	if (!encontrou) {
+		cout << "Nenhum album encontrado para esse genero.\n";
+  }
+  cout << "==========================================\n";
 }
 
 void pesquisa_por_posicao(album colecao[], int num_alb) {
-		cout << "==============================================================\n";
+	cout << "==============================================================\n";
 	cout << R"(                                             
               ##################                  
             ######          ######                
@@ -161,35 +158,29 @@ void pesquisa_por_posicao(album colecao[], int num_alb) {
                                 ######                                                                                          
 )" << "\n";
 	cout << "==============================================================\n\n";
-    int inicio, fim;
-    bool encontrou = false;
-
-    cout << "=== Mostrar Albuns por Posicao ===\n";
-    cout << "Mostrar a partir do album numero: ";
-    cin >> inicio;
-    cout << "Ate o album numero: ";
-    cin >> fim;
-
-    int var_inicio = inicio - 1;
-    int var_fim = fim - 1;
-
-    cout << "\n--- Exibindo do " << inicio << " ao " << fim << " ---\n";
-
-    for (int i = var_inicio; i <= var_fim; i++) {
-
-        if (i >= 0 && i < num_alb) {
-            if (colecao[i].sera_salvo == 'S') {
-                cout << "Posicao [" << i + 1 << "]:";
-                imprime(colecao[i]);
-                encontrou = true;
-            }
-        }
+  int inicio, fim;
+  bool encontrou = false;
+  cout << "=== Mostrar Albuns por Posicao ===\n";
+  cout << "Mostrar a partir do album numero: ";
+  cin >> inicio;
+  cout << "Ate o album numero: ";
+  cin >> fim;
+  int var_inicio = inicio - 1;
+  int var_fim = fim - 1;
+  cout << "\n--- Exibindo do " << inicio << " ao " << fim << " ---\n";
+  for (int i = var_inicio; i <= var_fim; i++) {
+  	if (i >= 0 && i < num_alb) {
+      if (colecao[i].sera_salvo == 'S') {
+        cout << "Posicao [" << i + 1 << "]:";
+        imprime(colecao[i]);
+        encontrou = true;
+      }
     }
-
-    if (!encontrou) {
-        cout << "Nenhum album encontrado nesse intervalo de posicoes.\n";
-    }
-    cout << "----------------------------------\n";
+	}
+  if (!encontrou) {
+    cout << "Nenhum album encontrado nesse intervalo de posicoes.\n";
+  }
+  cout << "----------------------------------\n";
 }
 
 void edita_album(album colecao[], int num_alb, int &albs_deletados) {

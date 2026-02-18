@@ -32,18 +32,23 @@ int main() {
 				break;
 			case '2':
 				registra_album(colecao, num_alb);
+				pausa();
 				break;
 			case '3':
 				edita_album(colecao, num_alb, albs_deletados);
+				pausa();
 				break;
 			case '4':
 				pesquisa_album(colecao, num_alb);
+				pausa();
 				break;
 			case '5':
 				pesquisa_por_genero(colecao, num_alb);
+				pausa();
 				break;
 			case '6':
 				pesquisa_por_posicao(colecao, num_alb);
+				pausa();
 			default:
 				cout << "Saindo ...";
 		}
