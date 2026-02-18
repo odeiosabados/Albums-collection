@@ -121,7 +121,7 @@ void pesquisa_por_genero(album colecao[], int num_alb) {
 )" << "\n";
 	cout << "==============================================================\n\n";
 	cin.ignore();
-  string genero_buscado;
+	string genero_buscado;
   bool encontrou = false;
   cout << "Digite o genero que deseja buscar: ";
   getline(cin, genero_buscado);
