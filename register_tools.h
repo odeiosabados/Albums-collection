@@ -44,7 +44,7 @@ void registra_album(album colecao[], int &num_alb) {
 	cin >> colecao[i].genero;
 	cout << "digite o ano do album: \n";
 	cin >> colecao[i].ano;
-	cout << "digite quantas musicas o album possue: \n";
+	cout << "digite quantas musicas o album possui: \n";
 	cin >> colecao[i].num_musicas;
 	cout << "deseja salvar as alteracoes? \n";
 	cout << "[s]/[n]\n";
@@ -59,9 +59,27 @@ void registra_album(album colecao[], int &num_alb) {
 }
 
 void pesquisa_album(album colecao[], int num_alb) {
+	cout << "==============================================================\n";
+	cout << R"(                                                                                 
+              ##################                  
+            ######          ######                
+            ####              ####                
+          ######                ####              
+          ####                  ####              
+          ####                  ####              
+            ####              ####                
+            ####              ####                
+            ######          ######                
+              ##################                  
+                  ##############                  
+                            ######                
+                              ######              
+                                ####                                                                                                               
+)" << "\n";
+	cout << "==============================================================\n\n";
 	cin.ignore();
 	string nomealbum;
-	cout << "insira o nome do album\n";
+	cout << "Insira o nome do album: \n";
 	getline(cin, nomealbum);
 	for (int i = 0; i < num_alb; i++) {
 		if (nomealbum == colecao[i].nome && colecao[i].sera_salvo == 'S')
@@ -71,11 +89,107 @@ void pesquisa_album(album colecao[], int num_alb) {
 
 void imprime_albums(album colecao[], int num_alb, int albs_deletados) {
 	cout << "==========================\n";
-	cout << "albums totais inseridos: " << num_alb - albs_deletados << "\n";
+	cout << "Albuns totais inseridos: " << num_alb - albs_deletados << "\n";
 	for (int i = 0; i < num_alb; i++) {
 		if (colecao[i].sera_salvo == 'S')
 			imprime(colecao[i]);
 	}
+}
+
+void pesquisa_por_genero(album colecao[], int num_alb) {
+		cout << "==============================================================\n";
+	cout << R"(                                                        
+              ##################                  
+            ######          ######                
+            ####              ####                
+          ######                ####              
+          ####                  ####              
+          ####                  ####              
+            ####              ####                
+            ####              ####                
+            ######          ######                
+              ##################                  
+                  ##############                  
+                            ######                
+                              ######              
+                                ####              
+                                ######                                                                                     
+)" << "\n";
+	cout << "==============================================================\n\n";
+    cin.ignore();
+    string genero_buscado;
+    bool encontrou = false;
+
+    cout << "Digite o genero que deseja buscar: ";
+    getline(cin, genero_buscado);
+
+    cout << "\n=== Albuns do genero: " << genero_buscado << " ===\n";
+
+    for (int i = 0; i < num_alb; i++) 
+	{
+	
+        if (genero_buscado == colecao[i].genero && colecao[i].sera_salvo == 'S') {
+            imprime(colecao[i]);
+            encontrou = true;
+        }
+    }
+
+    if (!encontrou) {
+        cout << "Nenhum album encontrado para esse genero.\n";
+    }
+    
+    cout << "==========================================\n";
+}
+
+void pesquisa_por_posicao(album colecao[], int num_alb) {
+		cout << "==============================================================\n";
+	cout << R"(                                             
+              ##################                  
+            ######          ######                
+            ####              ####                
+          ######                ####              
+          ####                  ####              
+          ####                  ####              
+            ####              ####                
+            ####              ####                
+            ######          ######                
+              ##################                  
+                  ##############                  
+                            ######                
+                              ######              
+                                ####              
+                                ######                                                                                          
+)" << "\n";
+	cout << "==============================================================\n\n";
+    int inicio, fim;
+    bool encontrou = false;
+
+    cout << "=== Mostrar Albuns por Posicao ===\n";
+    cout << "Mostrar a partir do album numero: ";
+    cin >> inicio;
+    cout << "Ate o album numero: ";
+    cin >> fim;
+
+    int var_inicio = inicio - 1;
+    int var_fim = fim - 1;
+
+    cout << "\n--- Exibindo do " << inicio << " ao " << fim << " ---\n";
+
+    for (int i = var_inicio; i <= var_fim; i++) {
+
+        if (i >= 0 && i < num_alb) {
+            if (colecao[i].sera_salvo == 'S') {
+                cout << "Posicao [" << i + 1 << "]:";
+                imprime(colecao[i]);
+                encontrou = true;
+            }
+        }
+    }
+
+    if (!encontrou) {
+        cout << "Nenhum album encontrado nesse intervalo de posicoes.\n";
+    }
+    cout << "----------------------------------\n";
 }
 
 void edita_album(album colecao[], int num_alb, int &albs_deletados) {

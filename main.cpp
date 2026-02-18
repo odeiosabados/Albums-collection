@@ -39,6 +39,11 @@ int main() {
 			case '4':
 				pesquisa_album(colecao, num_alb);
 				break;
+			case '5':
+				pesquisa_por_genero(colecao, num_alb);
+				break;
+			case '6':
+				pesquisa_por_posicao(colecao, num_alb);
 			default:
 				cout << "Saindo ...";
 		}
