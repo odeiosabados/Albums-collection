@@ -2,6 +2,7 @@
 #define REGISTER_TOOLS
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "album.h"
 using std::cout;
 using std::cin;
@@ -74,21 +75,21 @@ void pesquisa_album(album colecao[], int num_alb) {
                             ######                
                               ######              
                                 ####                                                                                                               
-)" << "\n";
+	)" << "\n";
 	cout << "==============================================================\n\n";
 	cin.ignore();
 	bool encontrou = false;
 	string nomealbum;
-	cout << "Insira o nome do album: \n";
+	cout << "Insira o nome ou ID do album: \n";
 	getline(cin, nomealbum);
 	for (int i = 0; i < num_alb; i++) {
-		if (nomealbum == colecao[i].nome && colecao[i].sera_salvo == 'S') {
+		if (nomealbum == colecao[i].nome || nomealbum == std::to_string(colecao[i].id) && colecao[i].sera_salvo == 'S') {
 			imprime(colecao[i]);
 			encontrou = true;
 		}
 	}
 	if (!encontrou)
-		cout << "Nenhum album encontrado com esse nome";
+		cout << "Nenhum album encontrado com esse nome ou ID";
 }
 
 void imprime_albums(album colecao[], int num_alb, int albs_deletados) {
@@ -122,11 +123,11 @@ void pesquisa_por_genero(album colecao[], int num_alb) {
 	cout << "==============================================================\n\n";
 	cin.ignore();
 	string genero_buscado;
-  bool encontrou = false;
-  cout << "Digite o genero que deseja buscar: ";
-  getline(cin, genero_buscado);
-  cout << "\n=== Albuns do genero: " << genero_buscado << " ===\n";
-  for (int i = 0; i < num_alb; i++) {
+	bool encontrou = false;
+	cout << "Digite o genero que deseja buscar: ";
+	getline(cin, genero_buscado);
+	cout << "\n=== Albuns do genero: " << genero_buscado << " ===\n";
+	for (int i = 0; i < num_alb; i++) {
 		if (genero_buscado == colecao[i].genero && colecao[i].sera_salvo == 'S') {
       imprime(colecao[i]);
       encontrou = true;
@@ -191,10 +192,10 @@ void edita_album(album colecao[], int num_alb, int &albs_deletados) {
 	cin.ignore();
 	string nomealbum;
 	char opcaoedita, opcaosalva;
-	cout << "digite o nome do album que deseja editar: \n";
+	cout << "Digite o nome ou ID do album que deseja editar: \n";
 	getline(cin, nomealbum);
 	for (int i = 0; i < num_alb; i++) {
-		if (nomealbum == colecao[i].nome && colecao[i].sera_salvo == 'S') {
+		if (nomealbum == colecao[i].nome || nomealbum == std::to_string(colecao[i].id) && colecao[i].sera_salvo == 'S') {
 			imprime(colecao[i]);
 			cout << "digite a acao desejada: \n";
 			cout << "[1] para deletar o album\n";

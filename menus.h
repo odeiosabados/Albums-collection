@@ -32,7 +32,7 @@ void menu_inicial() {
 
 void pausa() {
 	char tecla;
-	cout << "\npressione 1 para continuar\n";
+	cout << "\n< Pressione [1] para continuar >\n";
 	cin >> tecla;
 }
 
