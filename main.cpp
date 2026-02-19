@@ -19,7 +19,7 @@ int main() {
 		}
 	}
 	
-	//  aplicacao roda ate ser digitado 0
+	//  Aplicacao roda ate ser digitado 0
 	char opcao;
 	do {
 		aumenta_colecao(colecao, MAX, num_alb);
