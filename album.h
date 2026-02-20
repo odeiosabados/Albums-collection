@@ -8,22 +8,18 @@ struct album {
 	char sera_salvo = 'N';
 };
 
-struct identificador {
+struct identificador { //Struct usada na função cria_id() para atribuir um valor a cada caractere 
 	char caractere;
 	int valor;
 };
 
-int MAX = 10; // Tamanho atual do vetor
-int num_alb = 0; // NUMERO DE ALBUMS SALVOS abreviado  <- este valor é modificado pela funçao registra_album e pela leitura de dados do main.cpp
-int albs_deletados = 0; //Variavel criada para a funçao imprime_albums() exibir corretamente a quantidade de albuns mesmo apos albuns serem deletados
-album* colecao = new album[MAX];
-
 // Quando o numero de elementos do vetor chegar ao tamanho maximo, o vetor ira aumentar a capacidade em 10
 void aumenta_colecao(album* &colecao, int &MAX, int num_alb) {
 	if (num_alb == MAX) {
-		MAX+=10;
+		MAX+=1;
 		album* nova_colecao = new album[MAX];
 		for (int i = 0; i < num_alb; i++) {
+			nova_colecao[i].id = colecao[i].id;
 			nova_colecao[i].nome = colecao[i].nome;
 			nova_colecao[i].genero = colecao[i].genero;
 			nova_colecao[i].ano = colecao[i].ano;
@@ -35,9 +31,11 @@ void aumenta_colecao(album* &colecao, int &MAX, int num_alb) {
 	}
 }
 
-int cria_id (album p) {
+int cria_id (album p) { //funcao gera um ID de 4 digitos apartir da soma dos campos (nome, genero, ano, num de musicas)
 	int t = 27, soma = 0, soma2 = 0;
-	char alfabeto[t] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
+	char alfabeto[t] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ',
+		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+	};
 	
 	identificador senha[t];
 	for (int i = 0; i < t; i++) {

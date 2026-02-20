@@ -5,6 +5,12 @@
 #include "album.h"
 
 int main() {
+	// Declaraçao de variaveis
+	int MAX = 1; // Tamanho atual do vetor
+	int num_alb = 0; // NUMERO DE ALBUMS SALVOS abreviado  <- este valor é modificado pela funçao registra_album e pela leitura de dados do main.cpp
+	int albs_deletados = 0; //Variavel criada para a funçao imprime_albums() exibir corretamente a quantidade de albuns mesmo apos albuns serem deletados
+	album* colecao = new album[MAX];
+
 	// Leitura dos dados previamente salvos //
 	std::ifstream dados;
 	dados.open("data.txt");
@@ -32,13 +38,24 @@ int main() {
 				break;
 			case '2':
 				registra_album(colecao, num_alb);
+				pausa();
 				break;
 			case '3':
 				edita_album(colecao, num_alb, albs_deletados);
+				pausa();
 				break;
 			case '4':
+				icone_lupa();
 				pesquisa_album(colecao, num_alb);
+				pausa();
 				break;
+			case '5':
+				pesquisa_por_genero(colecao, num_alb);
+				pausa();
+				break;
+			case '6':
+				pesquisa_por_posicao(colecao, num_alb);
+				pausa();
 			default:
 				cout << "Saindo ...";
 		}
